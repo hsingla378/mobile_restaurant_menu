@@ -24,26 +24,28 @@
     </header>
 
     <!-- Items Menu -->
-    <main>
-        <!-- Menu Item -->
-            <div class="item">
-                <!-- Left side -->
-                <div class="item-left">
-                    <div class="item-img item-left-left">
-                        <img src="./images/pizza.png" alt="Pizza">
-                    </div>
-                    <div class="item-left-right">
-                        <p class="item-heading">Pizza</p>
-                        <p class="item-variants">pepperoni, mushroom, mozarella</p>
-                        <p class="item-price">$14</p>
-                    </div>
-                </div>
-                
-                <!-- add button -->
-                <div class="item-right">
-                    <i class="fa-solid fa-plus add-btn" id="add-btn"></i>
-                </div>
-            </div>
-        </main>
+    <main id="main"></main>
+    <section id="checkout" class="hidden">
+        <p id="checkout-heading">Your order</p>
+        <div id="cart-items"></div>
+
+        <!-- Total Price -->
+        <div id="total-price"></div>
+
+        <!-- Checkout Button -->
+        <button id="checkout-btn" class="green-btn" data-btn="checkout">Complete Order</button>
+    </section>
+
+    <form id="form" class="hidden">
+        <p>Enter card details</p>
+        <input type="text" name="name" id="name" placeholder="Enter your name" required autocomplete="off">
+        <input type="text" name="card-number" id="card-number" placeholder="Enter card number" required autocomplete="off">
+        <input type="text" name="card-cvv" id="card-cvv" placeholder="Enter CVV" required autocomplete="off">
+        <button type="submit" id="pay-btn" class="green-btn" data-btn="submit">Pay</button>
+        <button id="cut-btn" data-btn="cut">X</button>
+    </form>
+
+    <div id="thank-notice"></div>
+
 </body>
 </html>
