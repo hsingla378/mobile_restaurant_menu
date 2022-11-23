@@ -4,6 +4,7 @@ const checkout = document.getElementById("checkout")
 const totalPrice = document.getElementById("total-price")
 const formData = document.getElementById("form")
 const thankNotice = document.getElementById("thank-notice")
+const removeBtn = document.getElementById("remove-btn")
 
 let cart = []
 let total = 0
@@ -16,6 +17,8 @@ document.addEventListener("click", function(e){
         document.getElementById("form").classList.remove("hidden")
     } else if(e.target.dataset.btn == "cut"){
         document.getElementById("form").classList.add("hidden")
+    } else if(e.target.dataset.btn == "remove"){
+        removeBtnClick(e.target.parentElement)
     }
 
     if(cart.length){
@@ -23,9 +26,6 @@ document.addEventListener("click", function(e){
     } else {
         checkout.classList.add("hidden")
     }
-
-    // renderCart()
-    // renderTotalPrice()
 })
 
 function findItemById(itemId){
@@ -47,8 +47,29 @@ function addTargetObjToCart(item){
     `
     total += item.price
     cart.push(itemsHtml)
-
     renderCart()
+}
+
+function removeBtnClick(item){
+    const itemName = getFirstLine(item.innerText)
+    const obj = findItemByName(itemName)
+
+    total -= obj.price
+    const itemObj = item.parentElement
+    var index = cart.indexOf(itemObj);
+    cart.splice(index, 1);
+    renderCart()
+}
+
+function findItemByName(itemName){
+    let targetObj = menuArray.filter((item) => item.name == itemName)[0]
+    return targetObj
+}
+
+function getFirstLine(text) {
+    var index = text.indexOf("\n");
+    if (index === -1) index = undefined;
+    return text.substring(0, index);
 }
 
 function renderCart(){
@@ -79,7 +100,7 @@ formData.addEventListener("submit", function(e){
 
     document.getElementById("form").classList.add("hidden")
     document.getElementById("checkout").classList.add("hidden")
-    thankNotice.innerHTML = `<p>Thanks, ${name}! Yout order is on its way!</p>`
+    thankNotice.innerHTML = `<p>Thanks, ${name}! Your order is on its way!</p>`
 
     cart = []
     total = 0
